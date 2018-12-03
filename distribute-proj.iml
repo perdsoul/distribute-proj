@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="netty-all-4.1.32.Final" level="project" />
+    <orderEntry type="library" name="slf4j-log4j12-1.7.25" level="project" />
   </component>
 </module>
