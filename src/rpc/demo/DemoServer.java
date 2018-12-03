@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.netty.channel.ChannelHandlerContext;
-import rpckids.common.IMessageHandler;
-import rpckids.common.MessageOutput;
-import rpckids.server.RPCServer;
+import rpc.common.IMessageHandler;
+import rpc.common.MessageOutput;
+import rpc.server.RPCServer;
 
 class FibRequestHandler implements IMessageHandler<Integer> {
 

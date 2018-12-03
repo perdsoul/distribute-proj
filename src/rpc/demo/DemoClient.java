@@ -1,7 +1,7 @@
 package rpc.demo;
 
-import rpckids.client.RPCClient;
-import rpckids.client.RPCException;
+import rpc.client.RPCClient;
+import rpc.client.RPCException;
 
 public class DemoClient {
 
