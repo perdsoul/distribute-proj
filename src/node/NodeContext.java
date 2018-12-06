@@ -10,8 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class NodeContext {
     // first node to link
-    private static final String START_IP = "";
-    private static final int SERVER_POST = 45454;
+    public static final String START_IP = "localhost";
+    public static final int SERVER_POST = 45454;
     // this node's ip
     public static final String ip = "localhost";
     // all neighbors
@@ -25,14 +25,6 @@ public class NodeContext {
     static {
         neighbors = new ConcurrentHashMap<String, NodeClient>();
         messageSearched = new ConcurrentHashMap<String, Integer>();
-
-        // link to start ip,if this node haven't start ip,
-        // skip this process(means it's the first node in the net)
-        if (!(START_IP == null || START_IP.equals(""))) {
-            NodeClient client = new NodeClient(new RPCClient(START_IP, SERVER_POST));
-            neighbors.put(START_IP, client);
-            buildTopology();
-        }
     }
 
     /**
