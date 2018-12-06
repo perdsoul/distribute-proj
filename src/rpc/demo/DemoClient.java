@@ -21,7 +21,7 @@ public class DemoClient {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		RPCClient client = new RPCClient("localhost", 8888);
+		RPCClient client = new RPCClient("localhost", 45454);
 		DemoClient demo = new DemoClient(client);
 		for (int i = 0; i < 30; i++) {
 			try {
