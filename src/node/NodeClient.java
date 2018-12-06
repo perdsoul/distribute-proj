@@ -25,6 +25,7 @@ public class NodeClient {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        NodeServer.start();
         // link to start ip,if this node haven't start ip,
         // skip this process(means it's the first node in the net)
         if (!(START_IP == null || START_IP.equals(""))) {

@@ -10,8 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class NodeContext {
     // first node to link
-    public static final String START_IP = "localhost";
-    public static final int SERVER_POST = 45454;
+    public static final String START_IP = "";
+    public static final int SERVER_POST = 45455;
     // this node's ip
     public static final String ip = "localhost";
     // all neighbors
