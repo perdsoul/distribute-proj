@@ -44,10 +44,10 @@ public class NodeClient {
 
     public static void main(String[] args) throws InterruptedException {
         NodeServer.start(NodeContext.LOCAL_IP);
+        NodeClient.start(NodeContext.START_IP, NodeContext.SERVER_POST);
         buildTopology();
         System.out.println("--------------");
         System.out.println(neighbors);
-        NodeClient.start(NodeContext.START_IP, NodeContext.SERVER_POST);
     }
 
 }
