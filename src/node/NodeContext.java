@@ -6,8 +6,10 @@ import rpc.client.RPCClient;
 import rpc.common.RequestId;
 
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,7 +20,7 @@ public class NodeContext {
     public static final String START_IP = "";
     public static final int SERVER_POST = 45455;
     // this node's LOCAL_IP
-    public static String LOCAL_IP = "";
+    public static final String LOCAL_IP = getLocalHostLANIp();
     // all neighbors
     public static ConcurrentHashMap<String, NodeClient> neighbors;
     // all message id which had received
@@ -30,15 +32,7 @@ public class NodeContext {
     static {
         neighbors = new ConcurrentHashMap<String, NodeClient>();
         messageSearched = new ConcurrentHashMap<String, Integer>();
-        InetAddress addr = null;
-        try {
-            addr = InetAddress.getLocalHost();
-            LOCAL_IP = addr.getHostAddress().toString(); //获取本机ip
-            LOG.info("local IP : " + LOCAL_IP);
-        } catch (UnknownHostException e) {
-            LOG.error(e.getMessage());
-            e.printStackTrace();
-        }
+        LOG.info("local IP : " + LOCAL_IP);
     }
 
     /**
@@ -71,5 +65,41 @@ public class NodeContext {
                 linkNum++;
             }
         }
+    }
+
+    // 正确的IP拿法，即优先拿site-local地址
+    private static String getLocalHostLANIp() {
+        try {
+            InetAddress candidateAddress = null;
+            // 遍历所有的网络接口
+            for (Enumeration ifaces = NetworkInterface.getNetworkInterfaces(); ifaces.hasMoreElements();) {
+                NetworkInterface iface = (NetworkInterface) ifaces.nextElement();
+                // 在所有的接口下再遍历IP
+                for (Enumeration inetAddrs = iface.getInetAddresses(); inetAddrs.hasMoreElements();) {
+                    InetAddress inetAddr = (InetAddress) inetAddrs.nextElement();
+                    if (!inetAddr.isLoopbackAddress()) {// 排除loopback类型地址
+                        if (inetAddr.isSiteLocalAddress()) {
+                            // 如果是site-local地址，就是它了
+                            return inetAddr.getHostAddress();
+                        } else if (candidateAddress == null) {
+                            // site-local类型的地址未被发现，先记录候选地址
+                            candidateAddress = inetAddr;
+                        }
+                    }
+                }
+            }
+            if (candidateAddress != null) {
+                return candidateAddress.getHostAddress();
+            }
+            // 如果没有发现 non-loopback地址.只能用最次选的方案
+            InetAddress jdkSuppliedAddress = InetAddress.getLocalHost();
+            if (jdkSuppliedAddress == null) {
+                LOG.error("Failed to determine LAN address");
+            }
+            return jdkSuppliedAddress.getHostAddress();
+        } catch (Exception e) {
+            LOG.error("Failed to determine LAN address: " + e.getMessage());
+        }
+        return "localhost";
     }
 }
