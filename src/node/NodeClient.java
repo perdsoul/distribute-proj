@@ -25,7 +25,7 @@ public class NodeClient {
     }
 
     public Boolean saveFile(FileSaveMessage message) {
-        return (Boolean) client.send("search", message);
+        return (Boolean) client.send("save", message);
     }
 
     /**

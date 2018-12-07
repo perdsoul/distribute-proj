@@ -2,12 +2,16 @@ package rpc.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import node.pojo.FileSaveMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import rpc.common.IMessageHandler;
 import rpc.common.MessageOutput;
 
-import static node.NodeContext.*;
+import static node.NodeContext.messageSearched;
+import static node.NodeContext.saveFile;
 
 public class FileSaveServerHandler implements IMessageHandler<FileSaveMessage> {
+    private final static Logger LOG = LoggerFactory.getLogger(FileSaveServerHandler.class);
 
     @Override
     public void handle(ChannelHandlerContext ctx, String requestId, FileSaveMessage message) {
@@ -24,7 +28,7 @@ public class FileSaveServerHandler implements IMessageHandler<FileSaveMessage> {
         messageSearched.put(messageId, 1);
         // save data
         saveFile(filename, data, srcIp);
-
+        LOG.info("file saved : " + filename);
         ctx.writeAndFlush(new MessageOutput(requestId, "save_res", true));
     }
 }

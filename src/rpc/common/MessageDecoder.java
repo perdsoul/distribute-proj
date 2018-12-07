@@ -19,7 +19,7 @@ public class MessageDecoder extends ReplayingDecoder<MessageInput> {
 
 	private String readStr(ByteBuf in) {
 		int len = in.readInt();
-		if (len < 0 || len > (1 << 20)) {
+		if (len < 0) {
 			throw new DecoderException("string too long len=" + len);
 		}
 		byte[] bytes = new byte[len];

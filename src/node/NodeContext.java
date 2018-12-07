@@ -17,10 +17,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class NodeContext {
+    private static final String NAMESPLIT = "-|-*-|-";
     private static final String DIR_PATH = "files";
     private static final Logger LOG = LoggerFactory.getLogger(NodeContext.class);
     // first node to link
-    public static final String START_IP = "";//"100.66.228.198";
+    public static final String START_IP = "100.66.228.198";
     public static final int SERVER_POST = 45455;
     // this node's LOCAL_IP
     public static final String LOCAL_IP = getLocalHostLANIp();
@@ -29,7 +30,7 @@ public class NodeContext {
     // all message id which had received
     public static ConcurrentHashMap<String, Integer> messageSearched;
     // all files upload
-    public static ConcurrentHashMap<String, List<String>> filenameAndAddress;
+    public static ConcurrentHashMap<String, String> filenameAndAddress;
 
     /**
      * init NodeContext, set start node to link and build topology automatic
@@ -37,7 +38,7 @@ public class NodeContext {
     static {
         neighbors = new ConcurrentHashMap<String, NodeClient>();
         messageSearched = new ConcurrentHashMap<String, Integer>();
-        filenameAndAddress = new ConcurrentHashMap<String, List<String>> ();
+        filenameAndAddress = new ConcurrentHashMap<String, String>();
         LOG.info("local IP : " + LOCAL_IP);
     }
 
@@ -119,8 +120,10 @@ public class NodeContext {
             }
         } catch (FileNotFoundException e) {
             LOG.info("please ensure hte path is exist");
+            return;
         } catch (IOException e) {
             LOG.error(e.getMessage());
+            return;
         } finally {
             if (bufIn != null) {
                 try {
@@ -137,9 +140,22 @@ public class NodeContext {
         }
 
         /** distribute **/
-        List<String> fileAddress = new ArrayList<String>();
         // if more than 10M,split the file and store to other node.
-        if (bytes.length > 10 * 1024 * 1024 * 8) {
+        if (bytes.length > 10 * 1024 * 1024) {
+            // split to partNum part,use name as ip-filename-partNum-part
+            int neighborSize = neighbors.size();
+            int partNum = neighborSize > 4 ? 4 : neighborSize;
+            int byteNum = bytes.length / partNum;
+            for (int i = 1; i <= partNum; i++) {
+                String partName = filename + NAMESPLIT + partNum + NAMESPLIT + i;
+                int start = (i - 1) * byteNum;
+                int end = i * byteNum;
+                if (i == partNum) {
+                    end = bytes.length;
+                }
+                byte[] sub = subBytes(bytes, start, end);
+                saveFile(partName, sub, LOCAL_IP);
+            }
 
         } else {
             // save file in other nodes
@@ -150,21 +166,43 @@ public class NodeContext {
                 if (i >= 2) {
                     break;
                 }
-                FileSaveMessage message = new FileSaveMessage(messageId, filename, NodeContext.LOCAL_IP, bytes);
+                FileSaveMessage message = new FileSaveMessage(messageId, filename, LOCAL_IP, bytes);
                 n.getValue().saveFile(message);
-                fileAddress.add(n.getKey());
             }
         }
 
-        saveFile(filename, bytes, "localhost");
-        fileAddress.add("localhost");
-
-
-        filenameAndAddress.put(filename, new ArrayList<>());
+        // save one copy in local
+        saveFile(filename, bytes, LOCAL_IP);
     }
 
+    /**
+     * get sub bytes
+     *
+     * @param bytes
+     * @param start
+     * @param end
+     * @return
+     */
+    private static byte[] subBytes(byte[] bytes, int start, int end) {
+        byte[] sub = new byte[end - start];
+        for (int i = start; i < end; i++) {
+            sub[i - start] = bytes[i];
+        }
+        return sub;
+    }
+
+    /**
+     * save file
+     *
+     * @param filename
+     * @param data
+     * @param srcIp
+     */
     public static void saveFile(String filename, byte[] data, String srcIp) {
-        String newName = filename + "-|-*-|-" + srcIp;
+        String newName = srcIp + NAMESPLIT + filename;
+        // store filename and local ip
+        filenameAndAddress.put(newName, LOCAL_IP);
+        // writer file
         BufferedOutputStream bufOut = null;
         try {
             bufOut = new BufferedOutputStream(new FileOutputStream(DIR_PATH + "/" + newName));
