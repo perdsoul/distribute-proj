@@ -7,6 +7,7 @@ import rpc.common.RequestId;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -70,36 +71,23 @@ public class NodeContext {
     // 正确的IP拿法，即优先拿site-local地址
     private static String getLocalHostLANIp() {
         try {
-            InetAddress candidateAddress = null;
-            // 遍历所有的网络接口
-            for (Enumeration ifaces = NetworkInterface.getNetworkInterfaces(); ifaces.hasMoreElements();) {
-                NetworkInterface iface = (NetworkInterface) ifaces.nextElement();
-                // 在所有的接口下再遍历IP
-                for (Enumeration inetAddrs = iface.getInetAddresses(); inetAddrs.hasMoreElements();) {
-                    InetAddress inetAddr = (InetAddress) inetAddrs.nextElement();
-                    if (!inetAddr.isLoopbackAddress()) {// 排除loopback类型地址
-                        if (inetAddr.isSiteLocalAddress()) {
-                            // 如果是site-local地址，就是它了
-                            return inetAddr.getHostAddress();
-                        } else if (candidateAddress == null) {
-                            // site-local类型的地址未被发现，先记录候选地址
-                            candidateAddress = inetAddr;
-                        }
+            for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements();) {
+                NetworkInterface networkInterface = interfaces.nextElement();
+                if (networkInterface.isLoopback() || !networkInterface.isUp()) {
+                    continue;
+                }
+                Enumeration<InetAddress> addresses = networkInterface.getInetAddresses();
+                while (addresses.hasMoreElements()) {
+                    String ip = addresses.nextElement().getHostAddress();
+                    // only get LAN, do limits
+                    if (ip != null && ip.length() > 8 && ip.length() < 15) {
+                        return ip;
                     }
                 }
             }
-            if (candidateAddress != null) {
-                return candidateAddress.getHostAddress();
-            }
-            // 如果没有发现 non-loopback地址.只能用最次选的方案
-            InetAddress jdkSuppliedAddress = InetAddress.getLocalHost();
-            if (jdkSuppliedAddress == null) {
-                LOG.error("Failed to determine LAN address");
-            }
-            return jdkSuppliedAddress.getHostAddress();
-        } catch (Exception e) {
-            LOG.error("Failed to determine LAN address: " + e.getMessage());
+        } catch (SocketException e) {
+            LOG.debug("Error when getting host ip address: <{}>.", e.getMessage());
         }
-        return "localhost";
+        return null;
     }
 }
