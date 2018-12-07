@@ -80,7 +80,7 @@ public class NodeContext {
                 while (addresses.hasMoreElements()) {
                     String ip = addresses.nextElement().getHostAddress();
                     // only get LAN, do limits
-                    if (ip != null && ip.length() > 8 && ip.length() < 15) {
+                    if (ip != null && ip.length() > 8 && ip.length() < 16) {
                         return ip;
                     }
                 }
