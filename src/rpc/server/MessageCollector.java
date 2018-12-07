@@ -62,15 +62,16 @@ public class MessageCollector extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
-		LOG.debug("connection comes");
 		String clientIp = getIp(ctx);
+		LOG.info("connection comes : " + clientIp);
 		NodeClient.start(clientIp, NodeContext.SERVER_POST);
-		LOG.debug("build connect to " + clientIp);
+		LOG.info("build connect to " + clientIp);
 	}
 
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-		LOG.debug("connection leaves");
+		String clientIp = getIp(ctx);
+		LOG.debug("connection leaves : " + clientIp);
 	}
 
 	@Override
