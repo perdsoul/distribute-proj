@@ -21,7 +21,7 @@ public class SearchNodeServerHandler implements IMessageHandler<String> {
             return;
         }
 
-        // return ip of neighbors
+        // return LOCAL_IP of neighbors
         List<String> allIp = new ArrayList<String>();
         for (Map.Entry<String, NodeClient> entries : neighbors.entrySet()) {
             allIp.add(entries.getKey());

@@ -8,6 +8,8 @@ import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import node.NodeClient;
+import node.NodeContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +20,7 @@ import rpc.common.IMessageHandler;
 import rpc.common.MessageHandlers;
 import rpc.common.MessageInput;
 import rpc.common.MessageRegistry;
+import static node.NodeContext.*;
 
 @Sharable
 public class MessageCollector extends ChannelInboundHandlerAdapter {
@@ -60,6 +63,9 @@ public class MessageCollector extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		LOG.debug("connection comes");
+		String clientIp = getIp(ctx);
+		NodeClient.start(clientIp, NodeContext.SERVER_POST);
+		LOG.debug("build connect to " + clientIp);
 	}
 
 	@Override
@@ -96,6 +102,14 @@ public class MessageCollector extends ChannelInboundHandlerAdapter {
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
 		LOG.warn("connection error", cause);
+	}
+
+	private  String getIp(ChannelHandlerContext ctx){
+		String ipString = "";
+		String socketString = ctx.channel().remoteAddress().toString();
+		int colonAt = socketString.indexOf(":");
+		ipString = socketString.substring(1, colonAt);
+		return ipString;
 	}
 
 }

@@ -1,8 +1,6 @@
 package node;
 
 import rpc.client.RPCClient;
-import rpc.client.RPCException;
-import rpc.common.RequestId;
 
 import java.util.List;
 import static node.NodeContext.*;
@@ -24,16 +22,20 @@ public class NodeClient {
         return (List<String>) client.send("search", messageId);
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        NodeServer.start();
-        // link to start ip,if this node haven't start ip,
+    public static void start(String serverIp, int port) {
+        // link to start LOCAL_IP,if this node haven't start LOCAL_IP,
         // skip this process(means it's the first node in the net)
-        if (!(START_IP == null || START_IP.equals(""))) {
-            NodeClient client = new NodeClient(new RPCClient(START_IP, SERVER_POST));
-            neighbors.put(START_IP, client);
+        if (!(serverIp == null || serverIp.equals(""))) {
+            NodeClient client = new NodeClient(new RPCClient(serverIp, port));
+            neighbors.put(serverIp, client);
             buildTopology();
         }
         System.out.println(neighbors);
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        NodeServer.start(NodeContext.LOCAL_IP);
+        NodeClient.start(NodeContext.START_IP, NodeContext.SERVER_POST);
     }
 
 }

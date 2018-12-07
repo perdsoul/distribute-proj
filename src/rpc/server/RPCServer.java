@@ -62,7 +62,6 @@ public class RPCServer {
 			@Override
 			public void initChannel(SocketChannel ch) throws Exception {
 				ChannelPipeline pipe = ch.pipeline();
-				pipe.addLast(new ReadTimeoutHandler(60));
 				pipe.addLast(new MessageDecoder());
 				pipe.addLast(encoder);
 				pipe.addLast(collector);
