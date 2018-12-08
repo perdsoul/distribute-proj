@@ -1,6 +1,7 @@
 package node;
 
 import node.pojo.FileSaveMessage;
+import node.pojo.FileSearchMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rpc.client.RPCClient;
@@ -260,7 +261,7 @@ public class NodeContext {
 
         // add all neighbor's filename
         for (Map.Entry<String, NodeClient> n : neighbors.entrySet()) {
-            files.addAll(n.getValue().searchFile(messageId));
+            files.addAll(n.getValue().searchFile(new FileSearchMessage(messageId, key)));
         }
 
         return files;

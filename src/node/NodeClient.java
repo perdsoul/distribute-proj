@@ -1,6 +1,7 @@
 package node;
 
 import node.pojo.FileSaveMessage;
+import node.pojo.FileSearchMessage;
 import rpc.client.RPCClient;
 
 import java.util.List;
@@ -29,13 +30,13 @@ public class NodeClient {
         return (List<String>) client.send("search", messageId);
     }
 
-    public Set<String> searchFile(String messageId) {
-        messageSearched.put(messageId, 1);
-        return (Set<String>) client.send("searchFile", messageId);
+    public Set<String> searchFile(FileSearchMessage message) {
+        messageSearched.put(message.getMessageId(), 1);
+        return (Set<String>) client.send("searchFile", message);
     }
 
     public Boolean saveFile(FileSaveMessage message) {
-        messageSearched.put(message.getRequestId(), 1);
+        messageSearched.put(message.getMessageId(), 1);
         return (Boolean) client.send("save", message);
     }
 

@@ -2,24 +2,24 @@ package node.pojo;
 
 public class FileSaveMessage {
 
-    private String requestId;
+    private String messageId;
     private String filename;
     private String srcIp;
     private byte[] data;
 
-    public FileSaveMessage(String requestId, String filename, String srcIp, byte[] data) {
-        this.requestId = requestId;
+    public FileSaveMessage(String messageId, String filename, String srcIp, byte[] data) {
+        this.messageId = messageId;
         this.filename = filename;
         this.srcIp = srcIp;
         this.data = data;
     }
 
-    public String getRequestId() {
-        return requestId;
+    public String getMessageId() {
+        return messageId;
     }
 
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
     }
 
     public String getFilename() {

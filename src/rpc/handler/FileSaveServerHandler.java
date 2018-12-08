@@ -16,7 +16,7 @@ public class FileSaveServerHandler implements IMessageHandler<FileSaveMessage> {
     @Override
     public void handle(ChannelHandlerContext ctx, String requestId, FileSaveMessage message) {
         // if this message have searched before, ignore it
-        String messageId = message.getRequestId();
+        String messageId = message.getMessageId();
         String filename = message.getFilename();
         String srcIp = message.getSrcIp();
         byte[] data = message.getData();

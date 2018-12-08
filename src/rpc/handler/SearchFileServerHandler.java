@@ -1,6 +1,7 @@
 package rpc.handler;
 
 import io.netty.channel.ChannelHandlerContext;
+import node.pojo.FileSearchMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rpc.common.IMessageHandler;
@@ -10,13 +11,13 @@ import java.util.Set;
 
 import static node.NodeContext.*;
 
-public class SearchFileServerHandler implements IMessageHandler<String[]> {
+public class SearchFileServerHandler implements IMessageHandler<FileSearchMessage> {
     private final static Logger LOG = LoggerFactory.getLogger(SearchFileServerHandler.class);
 
     @Override
-    public void handle(ChannelHandlerContext ctx, String requestId, String[] message) {
-        String messageId = message[0];
-        String key = message[1];
+    public void handle(ChannelHandlerContext ctx, String requestId, FileSearchMessage message) {
+        String messageId = message.getMessageId();
+        String key = message.getKey();
 
         // if this message have searched before, ignore it
         if (messageSearched.containsKey(messageId)) {
