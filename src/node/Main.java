@@ -46,7 +46,7 @@ public class Main {
         while (true) {
             printMenu();
             // 获取输入选项
-            int choice = getchoice(sc, 1, 2);
+            int choice = getchoice(sc, 1, 3);
             if (choice == 1) {
                 System.out.println("please input your filename : ");
                 String filename = sc.nextLine();
@@ -54,9 +54,8 @@ public class Main {
             } else if (choice == 2) {
                 System.out.println("please input search key : ");
                 String key = sc.nextLine();
-                searchFile(key);
+                System.out.println(searchFile(key));
             } else {
-                return;
             }
         }
     }

@@ -6,6 +6,7 @@ import rpc.client.RPCClient;
 import java.util.List;
 import java.util.Set;
 
+import static node.NodeContext.messageSearched;
 import static node.NodeContext.neighbors;
 
 /**
@@ -24,14 +25,17 @@ public class NodeClient {
     }
 
     public List<String> searchNode(String messageId) {
+        messageSearched.put(messageId, 1);
         return (List<String>) client.send("search", messageId);
     }
 
     public Set<String> searchFile(String messageId) {
+        messageSearched.put(messageId, 1);
         return (Set<String>) client.send("searchFile", messageId);
     }
 
     public Boolean saveFile(FileSaveMessage message) {
+        messageSearched.put(message.getRequestId(), 1);
         return (Boolean) client.send("save", message);
     }
 

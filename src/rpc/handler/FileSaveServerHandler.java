@@ -27,6 +27,7 @@ public class FileSaveServerHandler implements IMessageHandler<FileSaveMessage> {
 
         messageSearched.put(messageId, 1);
         // save data
+        LOG.info("start save file : " + filename);
         saveFile(filename, data, srcIp);
         LOG.info("file saved : " + filename);
         ctx.writeAndFlush(new MessageOutput(requestId, "save_res", true));
