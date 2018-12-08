@@ -51,6 +51,10 @@ public class Main {
                 System.out.println("please input your filename : ");
                 String filename = sc.nextLine();
                 uploadFile(filename);
+            } else if (choice == 2) {
+                System.out.println("please input search key : ");
+                String key = sc.nextLine();
+                searchFile(key);
             } else {
                 return;
             }
