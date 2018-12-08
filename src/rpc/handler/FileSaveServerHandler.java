@@ -1,7 +1,7 @@
 package rpc.handler;
 
 import io.netty.channel.ChannelHandlerContext;
-import node.pojo.FileSaveMessage;
+import node.requestpojo.FileSaveMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rpc.common.IMessageHandler;
@@ -20,16 +20,16 @@ public class FileSaveServerHandler implements IMessageHandler<FileSaveMessage> {
         String filename = message.getFilename();
         String srcIp = message.getSrcIp();
         byte[] data = message.getData();
-
         if (messageSearched.containsKey(messageId)) {
+            ctx.writeAndFlush(new MessageOutput(requestId, "save_res", false));
             return;
         }
-
         messageSearched.put(messageId, 1);
+
         // save data
         LOG.info("start save file : " + filename);
         saveFile(filename, data, srcIp);
-        LOG.info("file saved : " + filename);
+        LOG.info("file save complete : " + filename);
         ctx.writeAndFlush(new MessageOutput(requestId, "save_res", true));
     }
 }

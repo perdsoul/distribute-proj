@@ -1,7 +1,7 @@
 package rpc.handler;
 
 import io.netty.channel.ChannelHandlerContext;
-import node.pojo.FileSearchMessage;
+import node.requestpojo.FileSearchMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rpc.common.IMessageHandler;
