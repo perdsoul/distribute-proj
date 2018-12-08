@@ -10,10 +10,7 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class NodeContext {
@@ -40,6 +37,12 @@ public class NodeContext {
         messageSearched = new ConcurrentHashMap<String, Integer>();
         filenameAndAddress = new ConcurrentHashMap<String, String>();
         LOG.info("local IP : " + LOCAL_IP);
+
+        // init filenameAndAddress
+        File dir = new File(DIR_PATH);
+        for (File f : dir.listFiles()) {
+            filenameAndAddress.put(f.getName(), LOCAL_IP);
+        }
     }
 
     /**
@@ -141,12 +144,16 @@ public class NodeContext {
 
         /** distribute **/
         // if more than 10M,split the file and store to other node.
-        if (bytes.length > 10 * 1024 * 1024) {
+        if (bytes.length > 1 * 1024 * 1024) {
             // split to partNum part,use name as ip-filename-partNum-part
             int neighborSize = neighbors.size();
             int partNum = neighborSize > 4 ? 4 : neighborSize;
             int byteNum = bytes.length / partNum;
-            for (int i = 1; i <= partNum; i++) {
+            int i = 1;
+            for (Map.Entry<String, NodeClient> n : neighbors.entrySet()) {
+                if (i > partNum) {
+                    break;
+                }
                 String partName = filename + NAMESPLIT + partNum + NAMESPLIT + i;
                 int start = (i - 1) * byteNum;
                 int end = i * byteNum;
@@ -154,7 +161,11 @@ public class NodeContext {
                     end = bytes.length;
                 }
                 byte[] sub = subBytes(bytes, start, end);
-                saveFile(partName, sub, LOCAL_IP);
+
+                String messageId = RequestId.next();
+                FileSaveMessage message = new FileSaveMessage(messageId, partName, LOCAL_IP, sub);
+                n.getValue().saveFile(message);
+                i++;
             }
 
         } else {
@@ -218,5 +229,40 @@ public class NodeContext {
                 }
             }
         }
+    }
+
+
+    /**
+     * search file
+     *
+     * @return
+     */
+    public static Set<String> searchFile(String key) {
+        String messageId = RequestId.next();
+        return searchFile(messageId, key);
+    }
+
+    /**
+     * search file use specify messageId
+     *
+     * @return
+     */
+    public static Set<String> searchFile(String messageId, String key) {
+        Set files = new HashSet();
+        // add all filename in this node to set
+        Enumeration<String> keys = filenameAndAddress.keys();
+        while (keys.hasMoreElements()) {
+            String filename = keys.nextElement();
+            if (filename.contains(key)) {
+                files.add(filename);
+            }
+        }
+
+        // add all neighbor's filename
+        for (Map.Entry<String, NodeClient> n : neighbors.entrySet()) {
+            files.addAll(n.getValue().searchFile(messageId));
+        }
+
+        return files;
     }
 }

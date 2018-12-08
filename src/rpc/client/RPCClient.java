@@ -1,11 +1,5 @@
 package rpc.client;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -14,12 +8,12 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.timeout.ReadTimeoutHandler;
-import rpc.common.MessageDecoder;
-import rpc.common.MessageEncoder;
-import rpc.common.MessageOutput;
-import rpc.common.MessageRegistry;
-import rpc.common.RequestId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import rpc.common.*;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class RPCClient {
 	private final static Logger LOG = LoggerFactory.getLogger(RPCClient.class);

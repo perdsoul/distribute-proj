@@ -3,9 +3,10 @@ package node;
 import node.pojo.FileSaveMessage;
 import rpc.client.RPCClient;
 
-import javax.xml.soap.Node;
 import java.util.List;
-import static node.NodeContext.*;
+import java.util.Set;
+
+import static node.NodeContext.neighbors;
 
 /**
  * Client to do remote request
@@ -17,11 +18,17 @@ public class NodeClient {
     public NodeClient(RPCClient client) {
         this.client = client;
         // there should register all
-        this.client.rpc("search_res", List.class).rpc("save_res", Boolean.class);
+        this.client.rpc("search_res", List.class).
+                rpc("save_res", Boolean.class).
+                rpc("searchFile_res", Set.class);
     }
 
     public List<String> searchNode(String messageId) {
         return (List<String>) client.send("search", messageId);
+    }
+
+    public Set<String> searchFile(String messageId) {
+        return (Set<String>) client.send("searchFile", messageId);
     }
 
     public Boolean saveFile(FileSaveMessage message) {

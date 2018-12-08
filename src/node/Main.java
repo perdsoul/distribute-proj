@@ -9,6 +9,7 @@ public class Main {
         System.out.println("-----MENU-------");
         System.out.println("1. upload");
         System.out.println("2. download");
+        System.out.println("3. search file");
     }
 
     /**

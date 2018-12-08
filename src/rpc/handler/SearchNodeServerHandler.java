@@ -18,6 +18,7 @@ public class SearchNodeServerHandler implements IMessageHandler<String> {
     public void handle(ChannelHandlerContext ctx, String requestId, String messageId) {
         // if this message have searched before, ignore it
         if (messageSearched.containsKey(messageId)) {
+            ctx.writeAndFlush(new MessageOutput(requestId, "search_res", null));
             return;
         }
 
