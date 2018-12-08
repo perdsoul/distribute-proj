@@ -56,7 +56,10 @@ public class NodeContext {
         // search by neighbors us identity message id
         String messageId = RequestId.next();
         for (Map.Entry<String, NodeClient> n : neighbors.entrySet()) {
-            otherIp.addAll(n.getValue().searchNode(messageId));
+            List<String> find = n.getValue().searchNode(messageId);
+            if (find != null) {
+                otherIp.addAll(find);
+            }
         }
 
         // build no more than three link
@@ -261,7 +264,10 @@ public class NodeContext {
 
         // add all neighbor's filename
         for (Map.Entry<String, NodeClient> n : neighbors.entrySet()) {
-            files.addAll(n.getValue().searchFile(new FileSearchMessage(messageId, key)));
+            Set<String> find = n.getValue().searchFile(new FileSearchMessage(messageId, key));
+            if (find != null) {
+                files.addAll(find);
+            }
         }
 
         return files;

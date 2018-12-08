@@ -449,3 +449,9 @@ Caused by: java.net.ConnectException: Connection refused
 2018-12-08 15:48:44,923 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xe37e9a67]'
 2018-12-08 15:48:44,940 - server started @ 100.67.84.43:45455
 
+2018-12-08 16:04:48,296 - local IP : 100.67.84.43
+2018-12-08 16:04:48,743 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xd7d3ba19]'
+2018-12-08 16:04:48,757 - server started @ 100.67.84.43:45455
+
+2018-12-08 16:04:55,208 - connection comes : 100.66.228.198
+2018-12-08 16:04:55,210 - build connect to 100.66.228.198
