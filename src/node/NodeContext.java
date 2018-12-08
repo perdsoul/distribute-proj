@@ -1,7 +1,8 @@
 package node;
 
-import node.pojo.FileSaveMessage;
-import node.pojo.FileSearchMessage;
+import node.requestpojo.FileDownloadMessage;
+import node.requestpojo.FileSaveMessage;
+import node.requestpojo.FileSearchMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rpc.client.RPCClient;
@@ -113,38 +114,8 @@ public class NodeContext {
         // get filename
         String[] pathSplits = path.split("[/\\\\]");
         String filename = pathSplits[pathSplits.length - 1];
-
-        BufferedInputStream bufIn = null;
-        List<Byte> data = new ArrayList<Byte>();
-        try {
-            bufIn = new BufferedInputStream(new FileInputStream(path));
-            byte[] b = new byte[1024];
-            int length = 0;
-            while ((length = bufIn.read(b)) != -1) {
-                for (int i = 0; i < length; i++) {
-                    data.add(b[i]);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            LOG.info("please ensure hte path is exist");
-            return;
-        } catch (IOException e) {
-            LOG.error(e.getMessage());
-            return;
-        } finally {
-            if (bufIn != null) {
-                try {
-                    bufIn.close();
-                } catch (IOException e) {
-                    LOG.error(e.getMessage());
-                }
-            }
-        }
-
-        byte[] bytes = new byte[data.size()];
-        for (int i = 0; i < bytes.length; i++) {
-            bytes[i] = data.get(i);
-        }
+        // read file
+        byte[] bytes = readFile(path);
 
         /** distribute **/
         // if more than 10M,split the file and store to other node.
@@ -191,6 +162,23 @@ public class NodeContext {
     }
 
     /**
+     * download file
+     *
+     * @param filename file
+     * @param ip where to download
+     */
+    public static void downloadFile(String filename, String ip) {
+        String messageId = RequestId.next();
+        FileDownloadMessage message = new FileDownloadMessage(messageId, filename, LOCAL_IP);
+        NodeClient client = neighbors.get(ip);
+        if (client.downloadFile(message)) {
+            LOG.info("download complete : " + filename);
+        } else {
+            LOG.info("download failed : " + filename);
+        }
+    }
+
+    /**
      * get sub bytes
      *
      * @param bytes
@@ -214,7 +202,12 @@ public class NodeContext {
      * @param srcIp
      */
     public static void saveFile(String filename, byte[] data, String srcIp) {
-        String newName = srcIp + NAMESPLIT + filename;
+        String newName = null;
+        if (srcIp != null && !srcIp.equals("")) {
+            newName = srcIp + NAMESPLIT + filename;
+        } else {
+            newName = filename;
+        }
         // store filename and local ip
         filenameAndAddress.put(newName, LOCAL_IP);
         // writer file
@@ -271,5 +264,40 @@ public class NodeContext {
         }
 
         return files;
+    }
+
+    public static byte[] readFile(String path) {
+        BufferedInputStream bufIn = null;
+        List<Byte> data = new ArrayList<Byte>();
+        try {
+            bufIn = new BufferedInputStream(new FileInputStream(path));
+            byte[] b = new byte[1024];
+            int length = 0;
+            while ((length = bufIn.read(b)) != -1) {
+                for (int i = 0; i < length; i++) {
+                    data.add(b[i]);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            LOG.info("please ensure hte path is exist");
+            return null;
+        } catch (IOException e) {
+            LOG.error(e.getMessage());
+            return null;
+        } finally {
+            if (bufIn != null) {
+                try {
+                    bufIn.close();
+                } catch (IOException e) {
+                    LOG.error(e.getMessage());
+                }
+            }
+        }
+
+        byte[] bytes = new byte[data.size()];
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i] = data.get(i);
+        }
+        return bytes;
     }
 }

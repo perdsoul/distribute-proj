@@ -1,7 +1,8 @@
 package node;
 
-import node.pojo.FileSaveMessage;
-import node.pojo.FileSearchMessage;
+import node.requestpojo.FileDownloadMessage;
+import node.requestpojo.FileSaveMessage;
+import node.requestpojo.FileSearchMessage;
 import rpc.client.RPCClient;
 
 import java.util.List;
@@ -22,7 +23,8 @@ public class NodeClient {
         // there should register all
         this.client.rpc("search_res", List.class).
                 rpc("save_res", Boolean.class).
-                rpc("searchFile_res", Set.class);
+                rpc("searchFile_res", Set.class).
+                rpc("download_res", Boolean.class);
     }
 
     public List<String> searchNode(String messageId) {
@@ -38,6 +40,10 @@ public class NodeClient {
     public Boolean saveFile(FileSaveMessage message) {
         messageSearched.put(message.getMessageId(), 1);
         return (Boolean) client.send("save", message);
+    }
+
+    public Boolean downloadFile(FileDownloadMessage message) {
+        return (Boolean) client.send("download", message);
     }
 
     /**

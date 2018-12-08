@@ -1,4 +1,4 @@
-package node.pojo;
+package node.requestpojo;
 
 public class FileSaveMessage {
 

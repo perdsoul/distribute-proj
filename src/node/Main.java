@@ -52,10 +52,15 @@ public class Main {
                 String filename = sc.nextLine();
                 uploadFile(filename);
             } else if (choice == 2) {
+                System.out.println("please input filename : ");
+                String filename = sc.nextLine();
+                System.out.println("please input ip : ");
+                String ip = sc.nextLine();
+                downloadFile(filename, ip);
+            } else if (choice == 3){
                 System.out.println("please input search key : ");
                 String key = sc.nextLine();
                 System.out.println(searchFile(key));
-            } else {
             }
         }
     }
