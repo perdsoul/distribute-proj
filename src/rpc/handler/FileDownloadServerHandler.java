@@ -43,7 +43,7 @@ public class FileDownloadServerHandler implements IMessageHandler<FileDownloadMe
 
     private void download(String filename, String ip) {
         // read file
-        byte[] bytes = readFile(filename);
+        byte[] bytes = readFile(DIR_PATH + "/" + filename);
         /** send **/
         String messageId = RequestId.next();
         NodeClient client = neighbors.get(ip);
