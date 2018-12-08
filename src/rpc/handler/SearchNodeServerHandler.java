@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rpc.common.IMessageHandler;
 import rpc.common.MessageOutput;
-import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 import java.util.List;

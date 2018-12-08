@@ -10,11 +10,14 @@ import java.util.Set;
 
 import static node.NodeContext.*;
 
-public class SearchFileServerHandler implements IMessageHandler<String> {
+public class SearchFileServerHandler implements IMessageHandler<String[]> {
     private final static Logger LOG = LoggerFactory.getLogger(SearchFileServerHandler.class);
 
     @Override
-    public void handle(ChannelHandlerContext ctx, String requestId, String messageId) {
+    public void handle(ChannelHandlerContext ctx, String requestId, String[] message) {
+        String messageId = message[0];
+        String key = message[1];
+
         // if this message have searched before, ignore it
         if (messageSearched.containsKey(messageId)) {
             ctx.writeAndFlush(new MessageOutput(requestId, "searchFile_res", null));
@@ -24,7 +27,7 @@ public class SearchFileServerHandler implements IMessageHandler<String> {
 
         // get all filename
         LOG.info("start search file");
-        Set<String> allFiles = searchFile(messageId);
+        Set<String> allFiles = searchFile(messageId, key);
         LOG.info("search file complete");
         ctx.writeAndFlush(new MessageOutput(requestId, "searchFile_res", allFiles));
     }
