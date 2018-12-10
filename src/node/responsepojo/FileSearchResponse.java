@@ -24,4 +24,12 @@ public class FileSearchResponse {
     public void setFilename(String filename) {
         this.filename = filename;
     }
+
+    @Override
+    public String toString() {
+        return "FileSearchResponse{" +
+                "saveIp='" + saveIp + '\'' +
+                ", filename='" + filename + '\'' +
+                '}';
+    }
 }

@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class NodeContext {
-    public static final String NAMESPLIT = "-|-*-|-";
+    public static final String NAMESPLIT = "-*-";
     public static final String DIR_PATH = "files";
     private static final Logger LOG = LoggerFactory.getLogger(NodeContext.class);
     // first node to link
@@ -30,7 +30,7 @@ public class NodeContext {
     // all message id which had received
     public static ConcurrentHashMap<String, Integer> messageSearched;
     // all files upload
-    public static ConcurrentHashMap<String, String> filenameAndAddress;
+    public static ConcurrentHashMap<String, Boolean> filenameAndStatus;
 
     /**
      * init NodeContext, set start node to link and build topology automatic
@@ -38,13 +38,13 @@ public class NodeContext {
     static {
         neighbors = new ConcurrentHashMap<String, NodeClient>();
         messageSearched = new ConcurrentHashMap<String, Integer>();
-        filenameAndAddress = new ConcurrentHashMap<String, String>();
+        filenameAndStatus = new ConcurrentHashMap<String, Boolean>();
         LOG.info("local IP : " + LOCAL_IP);
 
-        // init filenameAndAddress
+        // init filenameAndStatus
         File dir = new File(DIR_PATH);
         for (File f : dir.listFiles()) {
-            filenameAndAddress.put(f.getName(), LOCAL_IP);
+            filenameAndStatus.put(f.getName(), true);
         }
     }
 
@@ -210,7 +210,7 @@ public class NodeContext {
             newName = filename;
         }
         // store filename and local ip
-        filenameAndAddress.put(newName, LOCAL_IP);
+        filenameAndStatus.put(newName, true);
         // writer file
         BufferedOutputStream bufOut = null;
         try {
@@ -248,7 +248,7 @@ public class NodeContext {
     public static Set<FileSearchResponse> searchFile(String messageId, String key) {
         Set<FileSearchResponse> files = new HashSet();
         // add all filename in this node to set
-        Enumeration<String> keys = filenameAndAddress.keys();
+        Enumeration<String> keys = filenameAndStatus.keys();
         while (keys.hasMoreElements()) {
             String filename = keys.nextElement();
             if (filename.contains(key)) {
@@ -300,5 +300,16 @@ public class NodeContext {
             bytes[i] = data.get(i);
         }
         return bytes;
+    }
+
+    /**
+     * set file can't read when update
+     *
+     * @param filename
+     */
+    public void holdWhenUpdate(String filename) {
+        if (filenameAndStatus.containsKey(filename)) {
+            filenameAndStatus.put(filename, false);
+        }
     }
 }
