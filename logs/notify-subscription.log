@@ -455,3 +455,278 @@ Caused by: java.net.ConnectException: Connection refused
 
 2018-12-08 16:04:55,208 - connection comes : 100.66.228.198
 2018-12-08 16:04:55,210 - build connect to 100.66.228.198
+2018-12-08 16:14:01,185 - local IP : 100.67.84.43
+2018-12-08 16:14:01,576 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x6ec2780b]'
+2018-12-08 16:14:01,591 - server started @ 100.67.84.43:45455
+
+2018-12-08 16:14:05,203 - connection comes : 100.66.228.198
+2018-12-08 16:14:05,203 - build connect to 100.66.228.198
+2018-12-08 17:33:10,192 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:33:11,211 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:33:12,223 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:33:13,263 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:33:14,391 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:33:15,424 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:39:18,573 - local IP : 100.67.84.43
+2018-12-08 17:39:18,955 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xa369a49f]'
+2018-12-08 17:39:18,971 - server started @ 100.67.84.43:45455
+
+2018-12-08 17:41:38,817 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:41:39,948 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:41:41,080 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:41:42,219 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:41:54,183 - local IP : 100.67.84.43
+2018-12-08 17:41:54,587 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xe46b3e37]'
+2018-12-08 17:41:54,601 - server started @ 100.67.84.43:45455
+
+2018-12-08 17:42:15,413 - connection comes : 100.66.228.198
+2018-12-08 17:42:15,413 - build connect to 100.66.228.198
+2018-12-08 17:42:15,447 - start save file : testdownload
+2018-12-08 17:43:24,979 - local IP : 100.67.84.43
+2018-12-08 17:43:25,255 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x28093172]'
+2018-12-08 17:43:25,268 - server started @ 100.67.84.43:45455
+
+2018-12-08 17:43:25,819 - connection comes : 100.66.228.198
+2018-12-08 17:43:25,820 - build connect to 100.66.228.198
+2018-12-08 17:43:33,004 - start save file : testdownload
+2018-12-08 17:43:42,718 - local IP : 100.67.84.43
+2018-12-08 17:43:48,609 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xd316ad98]'
+2018-12-08 17:43:48,652 - server started @ 100.67.84.43:45455
+
+2018-12-08 17:43:49,573 - connection comes : 100.66.228.198
+2018-12-08 17:43:49,574 - build connect to 100.66.228.198
+2018-12-08 17:44:01,472 - start save file : testdownload
+2018-12-08 17:44:30,435 - local IP : 100.67.84.43
+2018-12-08 17:44:30,744 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xab64243f]'
+2018-12-08 17:44:30,766 - server started @ 100.67.84.43:45455
+
+2018-12-08 17:44:35,056 - connection comes : 100.66.228.198
+2018-12-08 17:44:35,056 - build connect to 100.66.228.198
+2018-12-08 17:44:45,506 - start save file : download
+2018-12-08 17:45:34,810 - local IP : 100.67.84.43
+2018-12-08 17:45:35,097 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xce42ab95]'
+2018-12-08 17:45:35,110 - server started @ 100.67.84.43:45455
+
+2018-12-08 17:45:40,830 - connection comes : 100.66.228.198
+2018-12-08 17:45:40,831 - build connect to 100.66.228.198
+2018-12-08 17:45:40,868 - start save file : testdown
+2018-12-08 17:49:12,502 - local IP : 100.67.84.43
+2018-12-08 17:49:12,947 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xddaf4c93]'
+2018-12-08 17:49:12,962 - server started @ 100.67.84.43:45455
+
+2018-12-08 17:49:13,974 - connection comes : 100.66.228.198
+2018-12-08 17:49:13,974 - build connect to 100.66.228.198
+2018-12-08 17:49:43,385 - start save file : testdown
+2018-12-08 17:53:14,932 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:53:15,941 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:53:16,955 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:53:18,014 - connect 100.66.228.198:45455 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /100.66.228.198:45455
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+2018-12-08 17:53:26,835 - local IP : 100.67.84.43
+2018-12-08 17:53:27,360 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xb274c21e]'
+2018-12-08 17:53:27,381 - server started @ 100.67.84.43:45455
+
+2018-12-08 17:53:51,500 - local IP : 100.67.84.43
+2018-12-08 17:53:51,758 - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x3f7aaf71]'
+2018-12-08 17:53:51,773 - server started @ 100.67.84.43:45455
+
+2018-12-08 17:53:57,882 - connection comes : 100.66.228.198
+2018-12-08 17:53:57,883 - build connect to 100.66.228.198
+2018-12-08 17:53:57,920 - start save file : testdown
+2018-12-08 17:53:57,920 - file save complete : testdown
+2018-12-08 17:53:58,042 - download complete : testdown

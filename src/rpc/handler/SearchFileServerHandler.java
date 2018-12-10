@@ -2,6 +2,7 @@ package rpc.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import node.requestpojo.FileSearchMessage;
+import node.responsepojo.FileSearchResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rpc.common.IMessageHandler;
@@ -28,7 +29,7 @@ public class SearchFileServerHandler implements IMessageHandler<FileSearchMessag
 
         // get all filename
         LOG.info("start search file");
-        Set<String> allFiles = searchFile(messageId, key);
+        Set<FileSearchResponse> allFiles = searchFile(messageId, key);
         LOG.info("search file complete");
         ctx.writeAndFlush(new MessageOutput(requestId, "searchFile_res", allFiles));
     }

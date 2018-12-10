@@ -3,6 +3,7 @@ package node;
 import node.requestpojo.FileDownloadMessage;
 import node.requestpojo.FileSaveMessage;
 import node.requestpojo.FileSearchMessage;
+import node.responsepojo.FileSearchResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rpc.client.RPCClient;
@@ -234,7 +235,7 @@ public class NodeContext {
      *
      * @return
      */
-    public static Set<String> searchFile(String key) {
+    public static Set<FileSearchResponse> searchFile(String key) {
         String messageId = RequestId.next();
         return searchFile(messageId, key);
     }
@@ -244,20 +245,20 @@ public class NodeContext {
      *
      * @return
      */
-    public static Set<String> searchFile(String messageId, String key) {
-        Set files = new HashSet();
+    public static Set<FileSearchResponse> searchFile(String messageId, String key) {
+        Set<FileSearchResponse> files = new HashSet();
         // add all filename in this node to set
         Enumeration<String> keys = filenameAndAddress.keys();
         while (keys.hasMoreElements()) {
             String filename = keys.nextElement();
             if (filename.contains(key)) {
-                files.add(filename);
+                files.add(new FileSearchResponse(LOCAL_IP, filename));
             }
         }
 
         // add all neighbor's filename
         for (Map.Entry<String, NodeClient> n : neighbors.entrySet()) {
-            Set<String> find = n.getValue().searchFile(new FileSearchMessage(messageId, key));
+            Set<FileSearchResponse> find = n.getValue().searchFile(new FileSearchMessage(messageId, key));
             if (find != null) {
                 files.addAll(find);
             }
@@ -272,14 +273,14 @@ public class NodeContext {
         try {
             bufIn = new BufferedInputStream(new FileInputStream(path));
             byte[] b = new byte[1024];
-            int length = 0;
+            int length = -1;
             while ((length = bufIn.read(b)) != -1) {
                 for (int i = 0; i < length; i++) {
                     data.add(b[i]);
                 }
             }
         } catch (FileNotFoundException e) {
-            LOG.info("please ensure hte path is exist");
+            LOG.info("please ensure hte path is exist : " + path);
             return null;
         } catch (IOException e) {
             LOG.error(e.getMessage());
