@@ -209,8 +209,6 @@ public class NodeContext {
         } else {
             newName = filename;
         }
-        // store filename and local ip
-        filenameAndStatus.put(newName, true);
         // writer file
         BufferedOutputStream bufOut = null;
         try {
@@ -227,6 +225,8 @@ public class NodeContext {
                 }
             }
         }
+        // store filename and local ip
+        filenameAndStatus.put(newName, true);
     }
 
 
