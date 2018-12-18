@@ -166,7 +166,7 @@ public class NodeContext {
      * download file
      *
      * @param filename file
-     * @param ip where to download
+     * @param ip       where to download
      */
     public static void downloadFile(String filename, String ip) {
         String messageId = RequestId.next();
@@ -307,9 +307,26 @@ public class NodeContext {
      *
      * @param filename
      */
-    public void holdWhenUpdate(String filename) {
+    public static void holdWhenUpdate(String filename) {
+        String messageId = RequestId.next();
+        holdWhenUpdate(filename, messageId);
+    }
+
+
+    /**
+     * set file can't read when update
+     *
+     * @param filename
+     * @param messageId special messageId
+     */
+    public static void holdWhenUpdate(String filename, String messageId) {
         if (filenameAndStatus.containsKey(filename)) {
             filenameAndStatus.put(filename, false);
+        }
+
+        // hold neighbors
+        for (Map.Entry<String, NodeClient> n : neighbors.entrySet()) {
+            n.getValue().holdFile(new FileSearchMessage(messageId, filename));
         }
     }
 }

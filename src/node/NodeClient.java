@@ -25,7 +25,8 @@ public class NodeClient {
         this.client.rpc("search_res", List.class).
                 rpc("save_res", Boolean.class).
                 rpc("searchFile_res", Set.class).
-                rpc("download_res", Boolean.class);
+                rpc("download_res", Boolean.class).
+                rpc("holdFile_res", Boolean.class);
     }
 
     public List<String> searchNode(String messageId) {
@@ -36,6 +37,11 @@ public class NodeClient {
     public Set<FileSearchResponse> searchFile(FileSearchMessage message) {
         messageSearched.put(message.getMessageId(), 1);
         return (Set<FileSearchResponse>) client.send("searchFile", message);
+    }
+
+    public Set<FileSearchResponse> holdFile(FileSearchMessage message) {
+        messageSearched.put(message.getMessageId(), 1);
+        return (Set<FileSearchResponse>) client.send("holdFile", message);
     }
 
     public Boolean saveFile(FileSaveMessage message) {

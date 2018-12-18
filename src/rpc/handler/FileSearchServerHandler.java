@@ -12,8 +12,8 @@ import java.util.Set;
 
 import static node.NodeContext.*;
 
-public class SearchFileServerHandler implements IMessageHandler<FileSearchMessage> {
-    private final static Logger LOG = LoggerFactory.getLogger(SearchFileServerHandler.class);
+public class FileSearchServerHandler implements IMessageHandler<FileSearchMessage> {
+    private final static Logger LOG = LoggerFactory.getLogger(FileSearchServerHandler.class);
 
     @Override
     public void handle(ChannelHandlerContext ctx, String requestId, FileSearchMessage message) {

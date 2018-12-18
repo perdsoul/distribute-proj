@@ -3,10 +3,7 @@ package node;
 import node.requestpojo.FileDownloadMessage;
 import node.requestpojo.FileSaveMessage;
 import node.requestpojo.FileSearchMessage;
-import rpc.handler.FileDownloadServerHandler;
-import rpc.handler.FileSaveServerHandler;
-import rpc.handler.SearchFileServerHandler;
-import rpc.handler.SearchNodeServerHandler;
+import rpc.handler.*;
 import rpc.server.RPCServer;
 
 public class NodeServer {
@@ -15,7 +12,8 @@ public class NodeServer {
         server.service("search", String.class, new SearchNodeServerHandler()).
                 service("save", FileSaveMessage.class, new FileSaveServerHandler()).
                 service("download", FileDownloadMessage.class, new FileDownloadServerHandler()).
-                service("searchFile", FileSearchMessage.class, new SearchFileServerHandler());
+                service("searchFile", FileSearchMessage.class, new FileSearchServerHandler()).
+                service("holdFile", FileSearchMessage.class, new FileHoldServerHandler());
         server.start();
     }
 }
